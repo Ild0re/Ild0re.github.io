@@ -34,9 +34,31 @@
 </div>
 
 <script>
+    // Получаем параметр answer из URL
     const urlParams = new URLSearchParams(window.location.search);
     const answer = urlParams.get('answer') || 'Ответ не найден';
     document.getElementById('answer').textContent = decodeURIComponent(answer);
+
+    // Проверяем доступность Telegram WebApp API
+    const isTelegramWebApp = typeof Telegram !== 'undefined' && Telegram.WebApp;
+
+    const closeBtn = document.getElementById('closeBtn');
+    const warning = document.getElementById('warning');
+
+    if (isTelegramWebApp) {
+      // Инициализируем WebApp (если нужно)
+      Telegram.WebApp.ready();
+
+      closeBtn.addEventListener('click', () => {
+        Telegram.WebApp.close();
+      });
+    } else {
+      // Если не в Telegram, показываем предупреждение и меняем поведение кнопки
+      warning.style.display = 'block';
+      closeBtn.addEventListener('click', () => {
+        alert('Закрытие доступно только внутри Telegram.');
+      });
+    }
 </script>
 </body>
 </html>
