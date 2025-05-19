@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ответ</title>
+    <style>
+        body {
+          font-family: sans-serif;
+          padding: 2em;
+          background: #f9f9f9;
+          text-align: center;
+        }
+        .box {
+          background: white;
+          padding: 1em;
+          border-radius: 10px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          max-width: 500px;
+          margin: auto;
+        }
+        button {
+          margin-top: 20px;
+          padding: 0.5em 1em;
+          font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>Ответ:</h2>
+    <p id="answer">Загрузка...</p>
+    <button onclick="Telegram.WebApp.close()">OK</button>
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const answer = urlParams.get('answer') || 'Ответ не найден';
+    document.getElementById('answer').textContent = decodeURIComponent(answer);
+</script>
+</body>
+</html>
